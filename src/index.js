@@ -74,6 +74,7 @@ const showLoadingAnimation = () => {
       loadingAnimationSpan.textContent += '.';
     }
     if (loadingAnimationSpan.style.display === 'none') {
+      loadingAnimationSpan.textContent = 'Fetching.';
       clearInterval(AnimationInterval);
     }
   }, 1000);
