@@ -47,8 +47,8 @@ const updateDisplay = (weatherDataObject) => {
   const cityHumidity = document.querySelector('#city-humidity > span');
 
   currentSelectedCity.textContent = weatherDataObject.city;
-  cityPressure.textContent = weatherDataObject.pressure;
-  cityHumidity.textContent = weatherDataObject.humidity;
+  cityPressure.textContent = `${weatherDataObject.pressure} mb`;
+  cityHumidity.textContent = `${weatherDataObject.humidity}%`;
 
   updateTemperatureDisplay(CURRENT_TEMPERATURE_UNIT);
 };
