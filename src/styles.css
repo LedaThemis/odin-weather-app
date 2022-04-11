@@ -18,6 +18,8 @@ button {
     border: none;
     background-color: var(--secondary-bg-color);
     color: var(--secondary-text-color);
+
+    cursor: pointer;
 }
 
 #header {
@@ -98,6 +100,4 @@ button {
     font-family: inherit;
     font-size: 1rem;
     font-weight: 500;
-
-    cursor: pointer;
 }
