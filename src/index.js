@@ -15,13 +15,11 @@ const getTemperature = (temperature, targetUnit) => {
 const getWeatherData = async (cityName) => {
   const API_REQUEST_URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
 
-  console.log('Fetching...');
   showLoadingAnimation();
 
   const pr = await fetch(API_REQUEST_URL, { mode: 'cors' });
   const res = await pr.json();
 
-  console.log('Done!');
   hideLoadingAnimation();
 
   if (res.cod === '404') {
