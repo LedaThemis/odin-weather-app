@@ -14,9 +14,14 @@ body {
     margin: 0;
 }
 
+#main {
+    display: flex;
+    justify-content: center;
+
+    padding: 2rem;
+}
+
 #city-input-div {
     display: flex;
     flex-direction: column;
-
-    max-width: 20rem;
 }
