@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    font-family: Poppins, sans-serif;
 }
 
 #header {
@@ -52,4 +53,8 @@ body {
 .status-display > span {
     font-size: 2rem;
     font-weight: bold;
+}
+
+.temperature-button {
+    font-family: inherit;
 }
