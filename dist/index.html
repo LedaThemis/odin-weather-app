@@ -18,8 +18,10 @@
             <label for="city">City:</label>
             <input type="text" name="city" id="city">
             <button id="submit-city" type="button">Update</button>
-            <span style="display: none; font-size: 0.75rem; color: red;">Please provide a city name.</span>
-            <span style="display: none; font-size: 0.75rem; color: red;">City not found, please try again.</span>
+            <span id="empty-city-name-error" style="display: none; font-size: 0.75rem; color: red;">Please provide a
+                city name.</span>
+            <span id="city-not-found-error" style="display: none; font-size: 0.75rem; color: red;">City not found,
+                please try again.</span>
         </div>
         <div id="weather-status-div">
             <p id="current-selected-city" class="status-display">Current Selected City: <span></span></p>
