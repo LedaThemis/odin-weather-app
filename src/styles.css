@@ -1,22 +1,29 @@
+:root {
+    --main-bg-color: #ECDBBA;
+    --secondary-bg-color: #2D4263;
+    --main-text-color: #191919;
+    --secondary-text-color: white;
+}
+
 body {
     margin: 0;
     font-family: Poppins, sans-serif;
 
     height: 100vh;
-    background-color: #ECDBBA;
-    color: #191919;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
 }
 
 button {
     border: none;
-    background-color: #2D4263;
-    color: white;
+    background-color: var(--secondary-bg-color);
+    color: var(--secondary-text-color);
 }
 
 #header {
     width: 100%;
-    background-color: #2D4263;
-    color: white;
+    background-color: var(--secondary-bg-color);
+    color: var(--secondary-text-color);
     padding: 1rem 0;
 
     text-align: center;
@@ -45,7 +52,7 @@ button {
 #city {
     border-radius: 1rem;
     padding: 0.25rem;
-    background-color: #ECDBBA;
+    background-color: var(--main-bg-color);
     border: 1px solid black;
 
     text-align: center;
