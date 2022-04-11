@@ -22,4 +22,18 @@ const getWeatherData = async (cityName) => {
   };
 };
 
-getWeatherData(CITY_NAME).then((res) => console.log(res));
+const updateDisplay = (weatherDataObject) => {
+  const currentSelectedCity = document.querySelector('#current-selected-city > span');
+  const cityTemperature = document.querySelector('#city-temperature > span');
+  const cityFeelsLike = document.querySelector('#city-feels_like > span');
+  const cityPressure = document.querySelector('#city-pressure > span');
+  const cityHumidity = document.querySelector('#city-humidity > span');
+
+  currentSelectedCity.textContent = weatherDataObject.city;
+  cityTemperature.textContent = weatherDataObject.temperature;
+  cityFeelsLike.textContent = weatherDataObject.feels_like;
+  cityPressure.textContent = weatherDataObject.pressure;
+  cityHumidity.textContent = weatherDataObject.humidity;
+};
+
+getWeatherData(CITY_NAME).then((res) => updateDisplay(res));
