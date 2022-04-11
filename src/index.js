@@ -15,8 +15,14 @@ const getTemperature = (temperature, targetUnit) => {
 const getWeatherData = async (cityName) => {
   const API_REQUEST_URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
 
+  console.log('Fetching...');
+  showLoadingAnimation();
+
   const pr = await fetch(API_REQUEST_URL, { mode: 'cors' });
   const res = await pr.json();
+
+  console.log('Done!');
+  hideLoadingAnimation();
 
   if (res.cod === '404') {
     return res;
@@ -55,6 +61,27 @@ const updateTemperatureDisplay = (unit) => {
   cityTemperature.textContent += ` ${unit}`;
   cityFeelsLike.textContent = getTemperature(parseFloat(CURRENT_WEATHER_INFO_OBJECT.feels_like), unit);
   cityFeelsLike.textContent += ` ${unit}`;
+};
+
+const showLoadingAnimation = () => {
+  const loadingAnimationSpan = document.querySelector('#loading-animation');
+  loadingAnimationSpan.style.display = '';
+
+  const AnimationInterval = setInterval(() => {
+    if (loadingAnimationSpan.textContent.match(/\./g).length >= 3) {
+      loadingAnimationSpan.textContent = 'Fetching.';
+    } else {
+      loadingAnimationSpan.textContent += '.';
+    }
+    if (loadingAnimationSpan.style.display === 'none') {
+      clearInterval(AnimationInterval);
+    }
+  }, 1000);
+};
+
+const hideLoadingAnimation = () => {
+  const loadingAnimationSpan = document.querySelector('#loading-animation');
+  loadingAnimationSpan.style.display = 'none';
 };
 
 const handleSubmitCity = (e) => {
