@@ -42,6 +42,11 @@ button {
     gap: 0.5rem;
 }
 
+#city {
+    border-radius: 1rem;
+    padding: 0.25rem;
+}
+
 #submit-city {
     font-size: 1rem;
     padding: 0.5rem 0;
