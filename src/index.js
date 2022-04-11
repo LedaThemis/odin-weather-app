@@ -1,6 +1,16 @@
 import './styles.css';
 
 const API_KEY = 'cae933781d5722d745027548659cfd71';
+let CURRENT_TEMPERATURE_UNIT = '°C';
+let CURRENT_WEATHER_INFO_OBJECT;
+
+const getTemperature = (temperature, targetUnit) => {
+  if (targetUnit === '°C') {
+    return Math.round((temperature - 273.15) * 100) / 100;
+  } else if (targetUnit === '°F') {
+    return Math.round(((temperature - 273.15) * (9 / 5) + 32) * 100) / 100;
+  }
+};
 
 const getWeatherData = async (cityName) => {
   const API_REQUEST_URL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
@@ -27,16 +37,24 @@ const getWeatherData = async (cityName) => {
 
 const updateDisplay = (weatherDataObject) => {
   const currentSelectedCity = document.querySelector('#current-selected-city > span');
-  const cityTemperature = document.querySelector('#city-temperature > span');
-  const cityFeelsLike = document.querySelector('#city-feels_like > span');
   const cityPressure = document.querySelector('#city-pressure > span');
   const cityHumidity = document.querySelector('#city-humidity > span');
 
   currentSelectedCity.textContent = weatherDataObject.city;
-  cityTemperature.textContent = weatherDataObject.temperature;
-  cityFeelsLike.textContent = weatherDataObject.feels_like;
   cityPressure.textContent = weatherDataObject.pressure;
   cityHumidity.textContent = weatherDataObject.humidity;
+
+  updateTemperatureDisplay(CURRENT_TEMPERATURE_UNIT);
+};
+
+const updateTemperatureDisplay = (unit) => {
+  const cityTemperature = document.querySelector('#city-temperature > span');
+  const cityFeelsLike = document.querySelector('#city-feels_like > span');
+
+  cityTemperature.textContent = getTemperature(parseFloat(CURRENT_WEATHER_INFO_OBJECT.temperature), unit);
+  cityTemperature.textContent += ` ${unit}`;
+  cityFeelsLike.textContent = getTemperature(parseFloat(CURRENT_WEATHER_INFO_OBJECT.feels_like), unit);
+  cityFeelsLike.textContent += ` ${unit}`;
 };
 
 const handleSubmitCity = (e) => {
@@ -57,11 +75,23 @@ const handleSubmitCity = (e) => {
       } else {
         cityNotFoundErrorSpan.style.display = 'none';
 
+        CURRENT_WEATHER_INFO_OBJECT = r;
+
         updateDisplay(r);
       }
     });
   }
 };
 
+const handleUpdateSelectedUnit = (e, newUnit) => {
+  CURRENT_TEMPERATURE_UNIT = newUnit;
+  updateTemperatureDisplay(newUnit);
+};
+
 const submitCityButton = document.querySelector('#submit-city');
+const celsiusButton = document.querySelector('#celsius-button');
+const fahrenheitButton = document.querySelector('#fahrenheit-button');
+
 submitCityButton.addEventListener('click', handleSubmitCity);
+celsiusButton.addEventListener('click', (e) => handleUpdateSelectedUnit(e, '°C'));
+fahrenheitButton.addEventListener('click', (e) => handleUpdateSelectedUnit(e, '°F'));
