@@ -1,11 +1,15 @@
 body {
     margin: 0;
     font-family: Poppins, sans-serif;
+
+    height: 100vh;
+    background-color: #ECDBBA;
+    color: #191919;
 }
 
 #header {
     width: 100%;
-    background-color: greenyellow;
+    background-color: #2D4263;
     color: white;
     padding: 1rem 0;
 
