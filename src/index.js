@@ -1,6 +1,5 @@
 import './styles.css';
 
-const CITY_NAME = 'Mosul';
 const API_KEY = 'cae933781d5722d745027548659cfd71';
 
 const getWeatherData = async (cityName) => {
