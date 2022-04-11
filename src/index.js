@@ -8,18 +8,22 @@ const getWeatherData = async (cityName) => {
 
   const pr = await fetch(API_REQUEST_URL, { mode: 'cors' });
   const res = await pr.json();
-  console.log(res);
-  return {
-    temperature: res.main.temp,
-    feels_like: res.main.feels_like,
-    pressure: res.main.pressure,
-    humidity: res.main.humidity,
-    city: res.name,
-    dt: res.dt,
-    sunrise: res.sys.sunrise,
-    sunset: res.sys.sunset,
-    status: res.weather[0].main,
-  };
+
+  if (res.cod === '404') {
+    return res;
+  } else {
+    return {
+      temperature: res.main.temp,
+      feels_like: res.main.feels_like,
+      pressure: res.main.pressure,
+      humidity: res.main.humidity,
+      city: res.name,
+      dt: res.dt,
+      sunrise: res.sys.sunrise,
+      sunset: res.sys.sunset,
+      status: res.weather[0].main,
+    };
+  }
 };
 
 const updateDisplay = (weatherDataObject) => {
@@ -36,4 +40,29 @@ const updateDisplay = (weatherDataObject) => {
   cityHumidity.textContent = weatherDataObject.humidity;
 };
 
-getWeatherData(CITY_NAME).then((res) => updateDisplay(res));
+const handleSubmitCity = (e) => {
+  const cityInput = document.querySelector('#city');
+  const cityName = cityInput.value;
+
+  const emptyCityNameErrorSpan = document.querySelector('#empty-city-name-error');
+  const cityNotFoundErrorSpan = document.querySelector('#city-not-found-error');
+
+  if (cityName === '') {
+    emptyCityNameErrorSpan.style.display = '';
+  } else {
+    emptyCityNameErrorSpan.style.display = 'none';
+
+    getWeatherData(cityName).then((r) => {
+      if (r.cod === '404') {
+        cityNotFoundErrorSpan.style.display = '';
+      } else {
+        cityNotFoundErrorSpan.style.display = 'none';
+
+        updateDisplay(r);
+      }
+    });
+  }
+};
+
+const submitCityButton = document.querySelector('#submit-city');
+submitCityButton.addEventListener('click', handleSubmitCity);
