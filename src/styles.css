@@ -4,7 +4,8 @@ body {
 
 #header {
     width: 100%;
-    background-color: aqua;
+    background-color: greenyellow;
+    color: white;
     padding: 1rem 0;
 
     text-align: center;
